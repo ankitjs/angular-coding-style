@@ -1,0 +1,45 @@
+<div class="applet-container margin-bottom-20">
+  <div class="applet-head">
+    <h2 class="active">{{ heading }}</h2>
+    <div class="action">
+      <app-date-range
+        #range
+        [hidden]="!config.filter"
+        [default]="config.filter"
+        (setDateRange)="setDateRange($event)"
+      ></app-date-range>
+    </div>
+  </div>
+  <div class="applet-body alpha">
+    <div [ngSwitch]="chartType">
+      <app-line-bar-chart *ngSwitchCase="'lineBar'"
+        ><app-chart-sum
+          *ngIf="chartSum"
+          [chartSum]="chartSum"
+          [config]="config"
+        ></app-chart-sum
+      ></app-line-bar-chart>
+      <app-doughnut-chart *ngSwitchCase="'doughnut'"></app-doughnut-chart>
+      <app-horizontal-bar-chart
+        *ngSwitchCase="'horizontalBar'"
+      ></app-horizontal-bar-chart>
+      <app-vertical-bar-chart
+        *ngSwitchCase="'verticalBar'"
+      ></app-vertical-bar-chart>
+      <app-multi-bar-chart *ngSwitchCase="'multiBar'"
+        ><app-chart-sum
+          *ngIf="chartSum"
+          [chartSum]="chartSum"
+          [config]="config"
+        ></app-chart-sum
+      ></app-multi-bar-chart>
+      <app-summary *ngSwitchCase="'summary'"></app-summary>
+    </div>
+  </div>
+</div>
+<!-- <app-chart-sum
+          *ngIf="chartSum"
+          [chartSum]="chartSum"
+          [config]="config"
+          ></app-chart-sum
+          > -->

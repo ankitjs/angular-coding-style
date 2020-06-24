@@ -1,0 +1,73 @@
+<app-status-card
+  *ngIf="dashboardService.ifContains(cardIds, 20)"
+  [api_url]="'Dashboard-1'"
+  [title]="'Dashboard-1'"
+></app-status-card>
+<div class="row">
+  <app-chart-container
+    *ngIf="dashboardService.ifContains(cardIds, 21)"
+    class="col-md-8"
+    [heading]="translate.instant('Dashboard-1') + ' Conducted'"
+    [chartType]="'lineBar'"
+    [api_url]="env.dashUrl + 'Dashboard-1/trends'"
+    [id]="21"
+    [config]="{
+      filter: 'week',
+      xAxis: 'Days',
+      yAxis: translate.instant('Dashboard-1'),
+      y2Axis: '',
+      label: 'Count',
+      lineDataKey: '',
+      barDataKey: 'createdAt',
+      lineDataManupulation: '',
+      chartSum: { firstLabel: 'Dashboard-1' }
+    }"
+  ></app-chart-container>
+  <app-chart-container
+    *ngIf="dashboardService.ifContains(cardIds, 22)"
+    class="col-md-4"
+    [heading]="'Category Wise'"
+    [chartType]="'doughnut'"
+    [api_url]="env.dashUrl + 'Dashboard-1/types'"
+    [id]="22"
+    [config]="{ filter: 'week' }"
+  ></app-chart-container>
+  <app-chart-container
+    *ngIf="dashboardService.ifContains(cardIds, 23)"
+    class="col-md-6"
+    [heading]="'Status Wise'"
+    [chartType]="'horizontalBar'"
+    [api_url]="env.dashUrl + 'Dashboard-1'"
+    [id]="23"
+    [config]="{
+      filter: 'week',
+      xAxis: 'Count',
+      yAxis: 'Status',
+      label: 'Count'
+    }"
+  ></app-chart-container>
+  <app-chart-container
+    *ngIf="dashboardService.ifContains(cardIds, 24)"
+    class="col-md-6"
+    [heading]="
+      translate.instant('Tasks') +
+      ' (On ' +
+      translate.instant('Dashboard-1') +
+      ')'
+    "
+    [chartType]="'horizontalBar'"
+    [api_url]="env.dashUrl + 'Dashboard-1/tasks'"
+    [id]="24"
+    [config]="{
+      filter: 'week',
+      xAxis: 'Count',
+      yAxis: 'Status',
+      label: 'Count'
+    }"
+  ></app-chart-container>
+  <!-- <app-chart-container
+    class="col-md-4"
+    [heading]="translate.instant('Jobs') + ' On Today\'s ' + translate.instant('Dashboard-1')"
+    [chartType]="'horizontalBar'"
+  ></app-chart-container> -->
+</div>

@@ -1,0 +1,27 @@
+<app-filter-header></app-filter-header>
+<div class="portlet-body">
+  <div class="dashboard-gutter">
+    <div class="tabbable-container">
+      <div class="tabbable-data">
+        <ul class="nav nav-tabs">
+          <li>
+            <a routerLinkActive="active" [routerLink]="['dashboard-1']">{{
+              "Dashobard 1" | translate
+            }}</a>
+          </li>
+
+          <li>
+            <a routerLinkActive="active" [routerLink]="['dashboard-2']">{{
+              "Dashboard 2" | translate
+            }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="tab-content alpha eg-1">
+      <div class="tab-pane active">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

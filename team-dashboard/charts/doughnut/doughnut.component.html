@@ -1,0 +1,37 @@
+<div class="card-container">
+  <div class="chart-container cat-wise">
+    <div class="chart-wise">
+      <canvas #chart></canvas>
+      <div #tooltip id="chartjs-tooltip">
+        <table></table>
+      </div>
+    </div>
+    <div id="chartjs-legend">
+      <ul>
+        <li *ngFor="let label of labelRef; let i = index">
+          <span [style.background]="backgroundColorRef[i]"></span>
+          {{ label }} : {{ showCurrencySymbol ? this.currencySymbol : ""
+          }}{{ dataRef[i] }}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="chart-overlay" *ngIf="loading">
+    <div class="check-loader"></div>
+  </div>
+  <!-- <div
+    class="null-graph"
+    *ngIf="loading" 
+    style="z-index: 1;
+  background: #fff;"
+  >
+    <figure class="bounce">
+      <img src="../assets/layouts/layout/img/null/null_chart.svg" />
+    </figure>
+  </div> -->
+  <div class="null-graph" *ngIf="!fetching && noData">
+    <figure>
+      <img src="../assets/layouts/layout/img/null/null_chart.svg" />
+    </figure>
+  </div>
+</div>

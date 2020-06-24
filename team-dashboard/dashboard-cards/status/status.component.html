@@ -1,0 +1,32 @@
+<div class="plain-box is">
+  <ng-container *ngIf="statusCards && statusCards.length">
+    <div class="in">
+      <div class="circle blue">
+        <i class="svg total-icon"></i>
+      </div>
+
+      <div class="data">
+        <h3>{{ total }}</h3>
+        <h4>{{ title | translate }}</h4>
+      </div>
+    </div>
+    <div class="plain-data">
+      <div class="ins">
+        <div class="data" *ngFor="let statusCard of statusCards">
+          <h3>{{ statusCard.value }}</h3>
+          <h4 class="new" [style.color]="statusCard.color">
+            {{ statusCard.title }}
+          </h4>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <div class="chart-overlay" *ngIf="loader">
+    <div class="check-loader"></div>
+  </div>
+  <div class="null-graph" *ngIf="noData">
+    <figure style="margin-bottom: 0px;">
+      <img src="../assets/layouts/layout/img/null/null_chart.svg" />
+    </figure>
+  </div>
+</div>

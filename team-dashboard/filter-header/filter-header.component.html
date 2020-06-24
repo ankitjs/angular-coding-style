@@ -1,0 +1,218 @@
+<div class="app-head">
+  <h1>
+    <div class="btn-group">
+      <span class="dropdown-toggle btn default outline" data-toggle="dropdown">
+        Team Dashboard<i class="svg angle-icon right"></i>
+      </span>
+      <ul class="dropdown-menu">
+        <li [routerLink]="['../employee-dashboard']"><a>My Dashboard</a></li>
+      </ul>
+    </div>
+  </h1>
+
+  <div class="action">
+    <div class="action-toggler app-bars">
+      <i class="fa-line"></i>
+      <div class="action-overlay"></div>
+    </div>
+    <form [formGroup]="filterForm">
+      <ng-container *ngIf="isFilterRequired || customFilterRequired">
+        <div class="btn-group" *ngIf="territoryList.length">
+          <ng-select
+            class="custom"
+            [items]="territoryList"
+            [searchable]="true"
+            [clearable]="true"
+            [multiple]="true"
+            [closeOnSelect]="false"
+            formControlName="territory"
+            bindLabel="name"
+            bindValue="id"
+            placeholder="Select Territory"
+            (change)="onChange()"
+          >
+            <ng-template ng-header-tmp *ngIf="territoryList.length">
+              <button
+                (click)="selectAll('territory', territoryList)"
+                class="btn default"
+              >
+                Select all
+              </button>
+              <button (click)="unselectAll('territory')" class="btn default">
+                Unselect all
+              </button>
+            </ng-template>
+            <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+              <div
+                class="ng-value"
+                *ngFor="let item of items ? items.slice(0, 2) : []"
+              >
+                <span class="ng-value-label"> {{ item.name }}</span>
+                <span
+                  class="ng-value-icon right"
+                  (click)="clear(item)"
+                  aria-hidden="true"
+                  >×</span
+                >
+              </div>
+              <div class="ng-value" *ngIf="items.length > 2">
+                <span class="ng-value-label"
+                  >+ {{ items.length - 2 }} more</span
+                >
+              </div>
+            </ng-template>
+          </ng-select>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="isFilterRequired || customFilterRequired">
+        <div class="btn-group" *ngIf="territoryList.length || siteList.length">
+          <ng-select
+            class="custom"
+            [items]="siteList || []"
+            [searchable]="true"
+            [clearable]="true"
+            [multiple]="true"
+            [closeOnSelect]="false"
+            formControlName="site"
+            bindLabel="name"
+            bindValue="id"
+            [loading]="siteLoading"
+            placeholder="Select Site"
+            (change)="onChange()"
+          >
+            <ng-template ng-header-tmp *ngIf="siteList.length">
+              <button (click)="selectAll('site', siteList)" class="btn default">
+                Select all
+              </button>
+              <button (click)="unselectAll('site')" class="btn default">
+                Unselect all
+              </button>
+            </ng-template>
+            <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+              <div
+                class="ng-value"
+                *ngFor="let item of items ? items.slice(0, 2) : []"
+              >
+                <span class="ng-value-label"> {{ item.name }}</span>
+                <span
+                  class="ng-value-icon right"
+                  (click)="clear(item)"
+                  aria-hidden="true"
+                  >×</span
+                >
+              </div>
+              <div class="ng-value" *ngIf="items.length > 2">
+                <span class="ng-value-label"
+                  >+ {{ items.length - 2 }} more</span
+                >
+              </div>
+            </ng-template>
+          </ng-select>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="isFilterRequired">
+        <div class="btn-group">
+          <ng-select
+            class="custom"
+            [items]="teamList || []"
+            [searchable]="true"
+            [clearable]="true"
+            [multiple]="true"
+            formControlName="team"
+            bindLabel="team_name"
+            [closeOnSelect]="false"
+            bindValue="id"
+            [loading]="teamLoading"
+            placeholder="Select Team"
+            (change)="onChange()"
+          >
+            <ng-template ng-header-tmp *ngIf="teamList.length">
+              <button (click)="selectAll('team', teamList)" class="btn default">
+                Select all
+              </button>
+              <button (click)="unselectAll('team')" class="btn default">
+                Unselect all
+              </button>
+            </ng-template>
+            <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+              <div
+                class="ng-value"
+                *ngFor="let item of items ? items.slice(0, 2) : []"
+              >
+                <span class="ng-value-label"> {{ item.team_name }}</span>
+                <span
+                  class="ng-value-icon right"
+                  (click)="clear(item)"
+                  aria-hidden="true"
+                  >×</span
+                >
+              </div>
+              <div class="ng-value" *ngIf="items.length > 2">
+                <span class="ng-value-label"
+                  >+ {{ items.length - 2 }} more</span
+                >
+              </div>
+            </ng-template>
+          </ng-select>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="isFilterRequired && isEmployeeFilterRequired">
+        <div class="btn-group">
+          <ng-select
+            class="custom"
+            [items]="employeeList || []"
+            [clearable]="true"
+            [multiple]="true"
+            formControlName="employee"
+            bindLabel="name"
+            [closeOnSelect]="false"
+            bindValue="id"
+            [loading]="empLoading"
+            placeholder="Select Employee"
+            (change)="onChange()"
+            [searchFn]="customSearchFn"
+          >
+            <ng-template ng-header-tmp *ngIf="employeeList.length">
+              <button
+                (click)="selectAll('employee', employeeList)"
+                class="btn default"
+              >
+                Select all
+              </button>
+              <button (click)="unselectAll('employee')" class="btn default">
+                Unselect all
+              </button>
+            </ng-template>
+            <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+              <div
+                class="ng-value"
+                *ngFor="let item of items ? items.slice(0, 2) : []"
+              >
+                <span class="ng-value-label"> {{ getName(item.name) }}</span>
+                <span
+                  class="ng-value-icon right"
+                  (click)="clear(item)"
+                  aria-hidden="true"
+                  >×</span
+                >
+              </div>
+              <div class="ng-value" *ngIf="items.length > 2">
+                <span class="ng-value-label"
+                  >+ {{ items.length - 2 }} more</span
+                >
+              </div>
+            </ng-template>
+            <ng-template ng-option-tmp let-item="item">
+              <span class="ng-option-label">{{ getName(item.name) }}</span>
+            </ng-template>
+          </ng-select>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="isFilterRequired || customFilterRequired">
+        <button class="btn default" (click)="filter()">
+          Apply
+        </button>
+      </ng-container>
+    </form>
+  </div>
+</div>

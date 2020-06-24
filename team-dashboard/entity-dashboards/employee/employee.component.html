@@ -1,0 +1,71 @@
+<app-track-summary
+  *ngIf="dashboardService.ifContains(cardIds, 60)"
+></app-track-summary>
+<div class="row">
+  <app-chart-container
+    *ngIf="dashboardService.ifContains(cardIds, 61)"
+    class="col-md-12"
+    heading="Today's Site Wise Total Presents & Absents"
+    [chartType]="'multiBar'"
+    [api_url]="todaySiteUrl"
+    [id]="61"
+    [config]="{
+      filter: null,
+      xAxis: 'Count',
+      yAxis: 'Count',
+      label: 'Count',
+      firstKey: 'presents',
+      secondKey: 'absents',
+      firstLabel: 'Presents',
+      secondLabel: 'Absents',
+      stacked: true
+    }"
+  >
+  </app-chart-container>
+
+  <app-chart-container
+    *ngIf="dashboardService.ifContains(cardIds, 62)"
+    class="col-md-12"
+    [heading]="translate.instant('Dashboard-2') + ' Overview'"
+    [chartType]="'multiBar'"
+    [api_url]="env.dashUrl + 'hrms/Dashboard-2/time-trends'"
+    [id]="62"
+    [config]="{
+      filter: 'week',
+      xAxis: 'Count',
+      yAxis: 'Count',
+      label: 'Count',
+      firstKey: 'presents',
+      secondKey: 'absents',
+      firstLabel: 'Presents',
+      secondLabel: 'Absents',
+      stacked: true
+    }"
+  >
+  </app-chart-container>
+  <app-birthday-card
+    *ngIf="dashboardService.ifContains(cardIds, 63)"
+    class="col-md-4"
+    [api_url]="'hrms/Dashboard-2/top-absentees'"
+    [heading]="'Top 5 Absentees'"
+    [config]="{
+      filter: null
+    }"
+    [id]="63"
+  ></app-birthday-card>
+  <app-birthday-card
+    *ngIf="dashboardService.ifContains(cardIds, 64)"
+    class="col-md-4"
+    [api_url]="'hrms/Dashboard-2/top-late-comers'"
+    [heading]="'Top 5 Late Ins'"
+    [config]="{
+      filter: null
+    }"
+    [id]="64"
+  ></app-birthday-card>
+</div>
+<!-- HRMS_Dashboard-2_SUMMARY(60L),
+Dashboard-2_SITE_WISE_SUMMARY(61L),
+Dashboard-2_DATE_WISE_SUMMARY(62L),
+Dashboard-2_TOP_ABSENT_SUMMARY(63L),
+Dashboard-2_TOP_LATE_SUMMARY(64L), -->

@@ -1,0 +1,24 @@
+<div class="card-container">
+  <div class="chart-container">
+    <canvas #chart></canvas>
+  </div>
+  <div class="chart-overlay" *ngIf="loading">
+    <div class="check-loader"></div>
+  </div>
+  <!-- <div
+    class="null-graph"
+    *ngIf="loading"
+    style="z-index: 1;
+    background: #fff;"
+  >
+    <figure class="bounce">
+      <img src="../assets/layouts/layout/img/null/null_chart.svg" />
+    </figure>
+  </div> -->
+
+  <div class="null-graph" *ngIf="noData">
+    <figure>
+      <img src="../assets/layouts/layout/img/null/null_chart.svg" />
+    </figure>
+  </div>
+</div>

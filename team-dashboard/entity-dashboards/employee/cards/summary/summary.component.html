@@ -1,0 +1,73 @@
+<div class="applet-container margin-bottom-20">
+  <div class="applet-head">
+    <h2 class="active">{{ "Today's" | translate }} Summary</h2>
+  </div>
+  <div class="applet-body alpha no">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="plain-box">
+          <ng-container *ngIf="!loading">
+            <div class="circle blue">
+              <i class="svg total-clockin-icon"></i>
+            </div>
+            <div class="data">
+              <h3>{{ summaryInfo?.value1 }}</h3>
+              <h4>Total Clock-In</h4>
+            </div>
+          </ng-container>
+          <div class="chart-overlay" *ngIf="loading">
+            <div class="check-loader"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="plain-box">
+          <ng-container *ngIf="!loading">
+            <div class="circle blue">
+              <i class="svg timely-clockin-icon"></i>
+            </div>
+            <div class="data">
+              <h3>{{ summaryInfo?.value2 }}</h3>
+              <h4>Timely Clock-In</h4>
+            </div>
+          </ng-container>
+          <div class="chart-overlay" *ngIf="loading">
+            <div class="check-loader"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="plain-box">
+          <ng-container *ngIf="!loading">
+            <div class="circle blue">
+              <i class="svg late-clockin-icon"></i>
+            </div>
+            <div class="data">
+              <h3>{{ summaryInfo?.value3 }}</h3>
+              <h4>Late Clock-In</h4>
+            </div>
+          </ng-container>
+          <div class="chart-overlay" *ngIf="loading">
+            <div class="check-loader"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="plain-box">
+          <ng-container *ngIf="!loading">
+            <div class="circle blue">
+              <i class="svg absentees-icon"></i>
+            </div>
+            <div class="data">
+              <h3>{{ summaryInfo?.value4 }}</h3>
+              <h4>Absentees</h4>
+            </div>
+          </ng-container>
+          <div class="chart-overlay" *ngIf="loading">
+            <div class="check-loader"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
